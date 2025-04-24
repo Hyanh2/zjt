@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>最佳女主角颁奖典礼</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+    body {
+      background-color: #000;
+      color: white;
+    }
+    header {
+      position: relative;
+      background-image: url('stage-lights-dark.jpg');
+      background-size: cover;
+      background-position: center;
+      text-align: center;
+      padding: 150px 20px 100px;
+      color: white;
+    }
+    header h1 {
+      font-size: 3em;
+      color: white;
+    }
+    header .subtitle {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+    .scroll-arrow {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(to bottom, #fff, #aaa);
+      -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat 50% 50%;
+      mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat 50% 50%;
+      animation: bounce 1.5s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      50% {
+        transform: translateX(-50%) translateY(10px);
+      }
+    }
+    nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      gap: 15px;
+      background-color: #111;
+      border-left: 5px solid #f00;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 40px;
+      background-color: #222;
+      border-radius: 8px;
+      transition: background 0.3s;
+      width: auto;
+      text-align: center;
+      font-size: 1.1em;
+    }
+    nav a:hover {
+      background-color: #f00;
+    }
+    .red-carpet {
+      height: auto;
+      min-height: 150px;
+      background: linear-gradient(to bottom, #600, #b00);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: gold;
+      font-size: 1.5em;
+      animation: fadeIn 1s ease-in-out;
+      margin-bottom: 30px;
+      padding: 30px 20px;
+    }
+    .intro-text {
+      text-align: center;
+      color: white;
+      font-family: "Heiti SC", "黑体", sans-serif;
+      font-size: 0.6em;
+      line-height: 1.8;
+      margin: 20px 0;
+      width: 100%;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    section {
+      padding: 40px 20px;
+      border-bottom: 1px solid #333;
+    }
+    section h2 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: gold;
+    }
+    .ribbon {
+      text-align: center;
+      color: #fff;
+      margin-bottom: 30px;
+      font-size: 1.2em;
+    }
+    .photos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 0 10px;
+    }
+    .photo-card {
+      position: relative;
+      background-color: #111;
+      overflow: hidden;
+      transition: transform 0.3s;
+      padding: 0;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    }
+    .photo-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+    }
+    .photo-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      flex-grow: 1;
+    }
+    .photo-card p {
+      color: #fff;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.9em;
+      padding: 0 10px 10px;
+    }
+    .award-photo {
+      position: relative;
+      background-color: #111;
+      cursor: pointer;
+      margin: 40px auto;
+      text-align: center;
+      overflow: hidden;
+      max-width: 800px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    }
+    .award-photo .photo-container {
+      position: relative;
+      height: 300px;
+      overflow: hidden;
+    }
+    .award-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+    .award-photo p.text {
+      display: none;
+      color: #fff;
+      padding: 15px;
+      background-color: rgba(0,0,0,0.7);
+      margin: 0;
+      font-size: 1.1em;
+    }
+    .award-photo.open img,
+    .award-photo.open p.text {
+      display: block;
+    }
+    .award-photo::before {
+      content: '点击揭晓获奖瞬间';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      color: #fff;
+      text-shadow: 0 0 5px #000;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('curtain.png') center/cover no-repeat;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 3;
+      transition: opacity 1s;
+    }
+    .award-photo.open::before {
+      opacity: 0;
+    }
+    .award-title {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      font-size: 1.5em;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px #000;
+      z-index: 4;
+      display: none;
+    }
+    .award-photo.open .award-title {
+      display: block;
+    }
+    #hidden .photos {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 0;
+      padding: 0;
+    }
+    #hidden .photos::-webkit-scrollbar {
+      display: none;
+    }
+    #hidden .photo-card {
+      scroll-snap-align: start;
+      min-width: 80%;
+      margin-right: 20px;
+      border: 2px solid #555;
+      box-shadow: 0 0 10px rgba(85, 85, 85, 0.5);
+    }
+    #hidden .photo-card:last-child {
+      margin-right: 0;
+    }
+    #hidden .photo-card:hover {
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>最佳女主角颁奖典礼</h1>
+    <p class="subtitle">谨以此网页献给我们的超级女主角 —— 张嘉彤</p>
+    <div class="scroll-arrow"></div>
+  </header>
+
+  <nav>
+    <a href="#cool">🕶️ 年度最酷瞬间</a>
+    <a href="#eat">🍔 年度最能吃瞬间</a>
+    <a href="#mean">😈 年度最mean瞬间</a>
+    <a href="#silly">🤪 年度最傻瞬间</a>
+    <a href="#sleep">💤 年度最能睡瞬间</a>
+    <a href="#helpless">😵‍💫 年度最无助瞬间</a>
+    <a href="#party">🎉 年度最嗨瞬间</a>
+    <a href="#group">📸 年度合影瞬间</a>
+    <a href="#hidden">🌊 沧海遗珠</a>
+  </nav>
+
+  <div class="red-carpet">
+    <div class="intro-text">
+      张嘉彤在这一年做了很多事<br>
+      她成功毕业<br>
+      经历了各种各样的考试<br>
+      还上了几天班<br>
+      现在正在起早贪黑准备最后的面试<br>
+      但是在学习之外她还有很多精彩瞬间被记录<br>
+      本评委凭着公平公正的原则经过严格筛选进行了总结<br>
+      邀请她参与本次活动<br>
+      接下来：
+    </div>
+    🎊 颁奖典礼正式开始 🎊  
+  </div>
+
+  <!-- 最酷瞬间 -->
+  <section id="cool">
+    <h2>🕶️ 年度最酷瞬间</h2>
+    <div class="ribbon">本奖项入围的瞬间有：</div>
+    <div class="photos">
+      <div class="photo-card">
+        <img src="入围瞬间1.jpg" alt="入围瞬间1">
+        <p>反正就是看起来很酷，就放这了</p>
+      </div>
+      <div class="photo-card">
+        <img src="入围瞬间2.jpg" alt="入围瞬间2">
+        <p>好像一个认真的研究学者，所以酷</p>
+      </div>
+      <div class="photo-card">
+        <img src="入围瞬间3.jpg" alt="入围瞬间3">
+        <p>我觉得很酷</p>
+      </div>
+    </div>
+    <div class="award-photo" onclick="this.classList.toggle('open')">
+      <div class="photo-container">
+        <div class="award-title">获奖作品揭晓</div>
+        <img src="获奖作品.jpg" alt="获奖瞬间">
+      </div>
+      <p class="text">经评委组（由我组成）一致决定颁给这张照片，同时也表彰该照片的摄影师贡献了光影构图的绝佳技术</p>
+    </div>
+  </section>
+
+  <!-- 最能吃瞬间 -->
+  <section id="eat">
+    <h2>🍔 年度最能吃瞬间</h2>
+    <div class="ribbon">本奖项入围的瞬间有：</div>
+    <div class="photos">
+      <div class="photo-card">
+        <img src="eat1.jpg" alt="入围一">
+        <p>文案一</p>
+      </div>
+      <div class="photo-card">
+        <img src="eat2.jpg" alt="入围二">
+        <p>文案二</p>
+      </div>
+    </div>
+    <div class="award-photo" onclick="this.classList.toggle('open')">
+      <div class="photo-container">
+        <div class="award-title">获奖作品揭晓</div>
+        <img src="eat-award.jpg" alt="获奖瞬间">
+      </div>
+      <p class="text">这是最终获奖的能吃瞬间！</p>
+    </div>
+  </section>
+
+  <!-- 最mean瞬间 -->
+  <section id="mean">
+    <h2>😈 年度最mean瞬间</h2>
+    <div class="ribbon">本奖项入围的瞬间有：</div>
+    <div class="photos">
+      <div class="photo-card">
+        <img src="mean1.jpg" alt="入围一">
+        <p>文案一</p>
+      </div>
+      <div class="photo-card">
+        <img src="mean2.jpg" alt="入围二">
+        <p>文案二</p>
+      </div>
+    </div>
+    <div class="award-photo" onclick="this.classList.toggle('open')">
+      <div class="photo-container">
+        <div class="award-title">获奖作品揭晓</div>
+        <img src="mean-award.jpg" alt="获奖瞬间">
+      </div>
+      <p class="text">这是最终获奖的mean瞬间！</p>
+    </div>
+  </section>
+
+  <!-- 最傻瞬间 -->
+  <section id="silly">
+    <h2>🤪 年度最傻瞬间</h2>
+    <div class="ribbon">本奖项入围的瞬间有：</div>
+    <div class="photos">
+      <div class="photo-card">
+        <img src="silly1.jpg" alt="入围一">
+        <p>文案一</p>
+      </div>
+      <div class="photo-card">
+        <img src="silly2.jpg" alt="入围二">
+        <p>文案二</p>
+      </div>
+    </div>
+    <div class="award-photo" onclick="this.classList.toggle('open')">
+      <div class="photo-container">
+        <div class="award-title">获奖作品揭晓</div>
+        <img src="silly-award.jpg" alt="获奖瞬间">
+      </div>
+      <p class="text">这是最终获奖的傻瞬间！</p>
+    </div>
+  </section>
+
+  <!-- 最能睡瞬间 -->
+  <section id="sleep">
+    <h2>💤 年度最能睡瞬间</h2>
+    <div class="ribbon">本奖项入围的瞬间有：</div>
+    <div class="photos">
+      <div class="photo-card">
+        <img src="sleep1.jpg" alt="入围一">
+        <p>文案一</p>
+      </div>
+      <div class="photo-card">
+        <img src="sleep2.jpg" alt="入围二">
+        <p>文案二</p>
+      </div>
+    </div>
+    <div class="award-photo" onclick="this.classList.toggle('open')">
+      <div class="photo-container">
+        <div class="award-title">获奖作品揭晓</div>
+        <img src="sleep-award.jpg" alt="获奖瞬间">
+      </div>
+      <p class="text">这是最终获奖的能睡瞬间！</p>
+    </div>
+  </section>
+
+  <!-- 最无助瞬间 -->
+  <section id="helpless">
+    <h2>😵‍💫 年度最无助瞬间</h2>
+    <div class="ribbon">本奖项入围的瞬间有：</div>
+    <div class="photos">
+      <div class="photo-card">
+        <img src="helpless1.jpg" alt="入围一">
+        <p>文案一</p>
+      </div>
+      <div class="photo-card">
+        <img src="helpless2.jpg" alt="入围二">
+        <p>文案二</p>
+      </div>
+    </div>
+    <div class="award-photo" onclick="this.classList.toggle('open')">
+      <div class="photo-container">
+        <div class="award-title">获奖作品揭晓</div>
+        <img src="helpless-award.jpg" alt="获奖瞬间">
+      </div>
+      <p class="text">这是最终获奖的无助瞬间！</p>
+    </div>
+  </section>
+
+  <!-- 最嗨瞬间 -->
+  <section id="party">
+    <h2>🎉 年度最嗨瞬间</h2>
+    <div class="ribbon">本奖项入围的瞬间有：</div>
+    <div class="photos">
+      <div class="photo-card">
+        <img src="party1.jpg" alt="入围一">
+        <p>文案一</p>
+      </div>
+      <div class="photo-card">
+        <img src="party2.jpg" alt="入围二">
+        <p>文案二</p>
+      </div>
+    </div>
+    <div class="award-photo" onclick="this.classList.toggle('open')">
+      <div class="photo-container">
+        <div class="award-title">获奖作品揭晓</div>
+        <img src="party-award.jpg" alt="获奖瞬间">
+      </div>
+      <p class="text">这是最终获奖的嗨瞬间！</p>
+    </div>
+  </section>
+
+  <!-- 年度合影瞬间 -->
+  <section id="group">
+    <h2>📸 年度合影瞬间</h2>
+    <div class="ribbon">本奖项入围的瞬间有：</div>
+    <div class="photos">
+      <div class="photo-card">
+        <img src="group1.jpg" alt="入围一">
+        <p>文案一</p>
+      </div>
+      <div class="photo-card">
+        <img src="group2.jpg" alt="入围二">
+        <p>文案二</p>
+      </div>
+    </div>
+    <div class="award-photo" onclick="this.classList.toggle('open')">
+      <div class="photo-container">
+        <div class="award-title">获奖作品揭晓</div>
+        <img src="group-award.jpg" alt="获奖瞬间">
+      </div>
+      <p class="text">这是最终获奖的合影瞬间！</p>
+    </div>
+  </section>
+
+  <!-- 沧海遗珠 -->
+  <section id="hidden">
+    <h2>🌊 沧海遗珠</h2>
+    <div class="ribbon">其他精彩瞬间：</div>
+    <div class="photos">
+      <div class="photo-card">
+        <img src="hidden1.jpg" alt="入围一">
+        <p>文案一</p>
+      </div>
+      <div class="photo-card">
+        <img src="hidden2.jpg" alt="入围二">
+        <p>文案二</p>
+      </div>
+      <div class="photo-card">
+        <img src="hidden3.jpg" alt="入围三">
+        <p>文案三</p>
+      </div>
+      <div class="photo-card">
+        <img src="hidden4.jpg" alt="入围四">
+        <p>文案四</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // 可拓展更多交互功能
+  </script>
+</body>
+</html>
