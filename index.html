@@ -194,7 +194,7 @@
       text-shadow: 0 0 5px #000;
       width: 100%;
       height: 100%;
-      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('curtain.png') center/cover no-repeat;
+      background: linear-gradient(rgba(100,0,0,0.8), rgba(70,0,0,0.8)), url('curtain.png') center/cover no-repeat;
       position: absolute;
       top: 0;
       left: 0;
@@ -288,25 +288,38 @@
       padding: 10px;
       background-color: rgba(0,0,0,0.7);
     }
-     /* 新增视频样式 */
-  .video-container {
-    position: relative;
-    width: 100%;
-    max-width: 800px;
-    margin: 30px auto;
-    background: #111;
-    box-shadow: 0 0 15px rgba(255,255,255,0.1);
-  }
-  .video-container video {
-    width: 100%;
-    display: block;
-  }
-  .video-caption {
-    color: white;
-    text-align: center;
-    padding: 15px;
-    font-size: 0.9em;
-  }
+    /* 彩蛋视频专属样式 */
+    .special-ribbon {
+      text-align: center;
+      color: gold;
+      margin: 40px auto 20px;
+      font-size: 1.5em;
+      text-shadow: 0 0 5px rgba(255,215,0,0.5);
+      padding: 10px;
+      background: linear-gradient(to right, #600, #b00, #600);
+      border-radius: 5px;
+      max-width: 80%;
+    }
+
+    /* 视频容器优化 */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      background: #111;
+      box-shadow: 0 0 15px rgba(255,255,255,0.1);
+    }
+    
+    .video-caption {
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      font-size: 0.9em;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
   </style>
 </head>
 <body>
@@ -373,7 +386,7 @@
         <p>在韦贵妃门前擦鼻涕真的很酷</p>
       </div>
     </div>
-    <div class="award-photo" onclick="this.classList.toggle('open')">
+    <div class="award-photo" onclick="toggleAwardPhoto(this)">
       <div class="photo-container">
         <div class="award-title">获奖作品揭晓</div>
         <img src="image/ku.jpg">
@@ -396,7 +409,7 @@
         <p>好像不能体现标题但是放在这先</p>
       </div>
     </div>
-    <div class="award-photo" onclick="this.classList.toggle('open')">
+    <div class="award-photo" onclick="toggleAwardPhoto(this)">
       <div class="photo-container">
         <div class="award-title">获奖作品揭晓</div>
         <img src="image/chi.jpg">
@@ -423,7 +436,7 @@
         <p>黑黢黢的也能看见一道白眼杀来</p>
       </div>
     </div>
-    <div class="award-photo" onclick="this.classList.toggle('open')">
+    <div class="award-photo" onclick="toggleAwardPhoto(this)">
       <div class="photo-container">
         <div class="award-title">获奖作品揭晓</div>
         <img src="image/mean.jpg">
@@ -462,7 +475,7 @@
         <p>谁懂，一种质朴的幽默感</p>
       </div>
     </div>
-    <div class="award-photo" onclick="this.classList.toggle('open')">
+   <div class="award-photo" onclick="toggleAwardPhoto(this)">
       <div class="photo-container">
         <div class="award-title">获奖作品揭晓</div>
         <img src="image/sha.jpg">
@@ -489,7 +502,7 @@
         <p>是获奖瞬间的有力竞争者，睡得不知天地为何物</p>
       </div>
     </div>
-    <div class="award-photo" onclick="this.classList.toggle('open')">
+   <div class="award-photo" onclick="toggleAwardPhoto(this)">
       <div class="photo-container">
         <div class="award-title">获奖作品揭晓</div>
         <img src="image/shui.jpg">
@@ -532,7 +545,7 @@
         <p>评委没什么好说的，当时评委也很无助</p>
       </div>
     </div>
-    <div class="award-photo" onclick="this.classList.toggle('open')">
+    <div class="award-photo" onclick="toggleAwardPhoto(this)">
       <div class="photo-container">
         <div class="award-title">获奖作品揭晓</div>
         <img src="image/wuzhu.jpg">
@@ -555,7 +568,7 @@
         <p>看见小狗就是嘬嘬嘬</p>
       </div>
     </div>
-    <div class="award-photo" onclick="this.classList.toggle('open')">
+    <div class="award-photo" onclick="toggleAwardPhoto(this)">
       <div class="photo-container">
         <div class="award-title">获奖作品揭晓</div>
         <img src="hi.jpg"">
@@ -598,7 +611,7 @@
         <p>评委喜欢</p>
       </div>
     </div>
-    <div class="award-photo" onclick="this.classList.toggle('open')">
+    <div class="award-photo" onclick="toggleAwardPhoto(this)">
       <div class="photo-container">
         <div class="award-title">获奖作品揭晓</div>
         <img src="image/hezhao.jpg>
@@ -640,14 +653,14 @@
         <img src="yizhu9.jpg" onclick="openModal(this)">
       </div>
     </div>
-    <div class="ribbon">彩蛋：张嘉彤铺床单珍贵视频</div>
-    div class="video-container">
-    <video controls poster="image/video-preview.jpg">
-      <source src="image/caidan.mp4" type="video/mp4">
-      您的浏览器不支持视频播放
-    </video>
+      <div class="special-ribbon">张嘉彤铺床单珍贵视频</div>
+    <div class="video-container">
+      <video controls poster="image/video-preview.jpg" style="width:100%">
+        <source src="image/caidan.mp4" type="video/mp4">
+        您的浏览器不支持视频播放
+      </video>
+    </div>
     <p class="video-caption">张嘉彤铺床单珍贵视频</p>
-  </div>
   </section>
 
   <!-- 图片放大模态框 -->
@@ -658,6 +671,17 @@
   </div>
 
   <script>
+    // 修改后的获奖照片点击逻辑
+    function toggleAwardPhoto(element) {
+      if(element.classList.contains('open')) {
+        // 如果已经打开，则放大图片
+        const img = element.querySelector('.photo-container img');
+        openModal(img);
+      } else {
+        // 第一次点击显示照片
+        element.classList.add('open');
+      }
+    }
     // 图片放大功能
     function openModal(img) {
       const modal = document.getElementById("imageModal");
