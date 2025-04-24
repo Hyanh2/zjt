@@ -142,6 +142,7 @@
       height: 200px;
       object-fit: cover;
       flex-grow: 1;
+      cursor: zoom-in; /* 添加放大光标提示 */
     }
     .photo-card p {
       color: #fff;
@@ -244,6 +245,49 @@
     #hidden .photo-card:hover {
       transform: none;
     }
+
+    /* 新增的图片放大样式 */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      animation: fadeIn 0.3s;
+    }
+    .modal-content {
+      display: block;
+      max-width: 90%;
+      max-height: 90%;
+      margin: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    .caption {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      padding: 10px;
+      background-color: rgba(0,0,0,0.7);
+    }
   </style>
 </head>
 <body>
@@ -286,27 +330,27 @@
     <div class="ribbon">本奖项入围的瞬间有：</div>
     <div class="photos">
       <div class="photo-card">
-        <img src="image/mean1.jpg" alt="入围瞬间1">
+        <img src="image/mean1.jpg" alt="入围瞬间1" onclick="openModal(this)">
         <p>反正就是看起来很酷，就放这了</p>
       </div>
       <div class="photo-card">
-        <img src="image/ku1.jpg" alt="入围瞬间2">
+        <img src="image/ku1.jpg" alt="入围瞬间2" onclick="openModal(this)">
         <p>好像一个认真的研究学者，所以酷</p>
       </div>
       <div class="photo-card">
-        <img src="image/mean2.jpg" alt="入围瞬间3">
+        <img src="image/mean2.jpg" alt="入围瞬间3" onclick="openModal(this)">
         <p>我觉得很酷</p>
       </div>
       <div class="photo-card">
-        <img src="image/ku4.jpg" alt="入围瞬间4">
+        <img src="image/ku4.jpg" alt="入围瞬间4" onclick="openModal(this)">
         <p>这个差一点就是获奖瞬间了</p>
       </div>
       <div class="photo-card">
-        <img src="image/ku2.jpg" alt="入围瞬间5">
+        <img src="image/ku2.jpg" alt="入围瞬间5" onclick="openModal(this)">
         <p>连自己都觉得很酷</p>
       </div>
       <div class="photo-card">
-        <img src="image/ku3.jpg" alt="入围瞬间6">
+        <img src="image/ku3.jpg" alt="入围瞬间6" onclick="openModal(this)">
         <p>在韦贵妃门前擦鼻涕真的很酷</p>
       </div>
     </div>
@@ -325,11 +369,11 @@
     <div class="ribbon">本奖项入围的瞬间有：</div>
     <div class="photos">
       <div class="photo-card">
-        <img src="image/chi1.jpg" alt="入围瞬间一">
+        <img src="image/chi1.jpg" alt="入围瞬间一" onclick="openModal(this)">
         <p>要点开大图人在左侧，但是还记得睫毛刀在右边桌子上</p>
       </div>
       <div class="photo-card">
-        <img src="image/chi2.jpg" alt="入围瞬间二">
+        <img src="image/chi2.jpg" alt="入围瞬间二" onclick="openModal(this)">
         <p>好像不能体现标题但是放在这先</p>
       </div>
     </div>
@@ -348,15 +392,15 @@
     <div class="ribbon">本奖项入围的瞬间有：</div>
     <div class="photos">
       <div class="photo-card">
-        <img src="image/mean3.jpg" alt="入围瞬间一">
+        <img src="image/mean3.jpg" alt="入围瞬间一" onclick="openModal(this)">
         <p>有点吓人的视角</p>
       </div>
       <div class="photo-card">
-        <img src="image/mean4.jpg" alt="入围瞬间二">
+        <img src="image/mean4.jpg" alt="入围瞬间二" onclick="openModal(this)">
         <p>我天超绝臭脸</p>
       </div>
       <div class="photo-card">
-        <img src="image/mean5.jpg" alt="入围瞬间三">
+        <img src="image/mean5.jpg" alt="入围瞬间三" onclick="openModal(this)">
         <p>黑黢黢的也能看见一道白眼杀来</p>
       </div>
     </div>
@@ -375,27 +419,27 @@
     <div class="ribbon">本奖项入围的瞬间有：</div>
     <div class="photos">
       <div class="photo-card">
-        <img src="image/sha1.jpg" alt="入围瞬间一">
+        <img src="image/sha1.jpg" alt="入围瞬间一" onclick="openModal(this)">
         <p>评委一致认为像奥特之母</p>
       </div>
       <div class="photo-card">
-        <img src="image/sha2.jpg" alt="入围瞬间二">
+        <img src="image/sha2.jpg" alt="入围瞬间二" onclick="openModal(this)">
         <p>不知道为什么脱脚套瞬间入围了</p>
       </div>
         <div class="photo-card">
-        <img src="image/sha3.jpg" alt="入围瞬间三">
+        <img src="image/sha3.jpg" alt="入围瞬间三" onclick="openModal(this)">
         <p>评委看了笑了三声</p>
       </div>
         <div class="photo-card">
-        <img src="image/sha4.jpg" alt="入围瞬间四">
+        <img src="image/sha4.jpg" alt="入围瞬间四" onclick="openModal(this)">
         <p>评委看了笑了四声</p>
       </div>
         <div class="photo-card">
-        <img src="image/sha5.jpg" alt="入围瞬间五">
+        <img src="image/sha5.jpg" alt="入围瞬间五" onclick="openModal(this)">
         <p>评委看了笑了五声</p>
       </div>
         <div class="photo-card">
-        <img src="image/sha6.jpg" alt="入围瞬间六">
+        <img src="image/sha6.jpg" alt="入围瞬间六" onclick="openModal(this)">
         <p>谁懂，一种质朴的幽默感</p>
       </div>
     </div>
@@ -414,15 +458,15 @@
     <div class="ribbon">本奖项入围的瞬间有：</div>
     <div class="photos">
       <div class="photo-card">
-        <img src="image/shui1.jpg" alt="入围瞬间一">
+        <img src="image/shui1.jpg" alt="入围瞬间一" onclick="openModal(this)">
         <p>睡得悠哉游哉</p>
       </div>
       <div class="photo-card">
-        <img src="image/shui2.jpg" alt="入围瞬间二">
+        <img src="image/shui2.jpg" alt="入围瞬间二" onclick="openModal(this)">
         <p>睡得倾国倾城</p>
       </div>
        <div class="photo-card">
-        <img src="image/shui3.png" alt="入围瞬间三">
+        <img src="image/shui3.png" alt="入围瞬间三" onclick="openModal(this)">
         <p>是获奖瞬间的有力竞争者，睡得不知天地为何物</p>
       </div>
     </div>
@@ -441,11 +485,11 @@
     <div class="ribbon">本奖项入围的瞬间有：</div>
     <div class="photos">
       <div class="photo-card">
-        <img src="helpless1.jpg" alt="入围一">
+        <img src="helpless1.jpg" alt="入围一" onclick="openModal(this)">
         <p>文案一</p>
       </div>
       <div class="photo-card">
-        <img src="helpless2.jpg" alt="入围二">
+        <img src="helpless2.jpg" alt="入围二" onclick="openModal(this)">
         <p>文案二</p>
       </div>
     </div>
@@ -464,11 +508,11 @@
     <div class="ribbon">本奖项入围的瞬间有：</div>
     <div class="photos">
       <div class="photo-card">
-        <img src="party1.jpg" alt="入围一">
+        <img src="party1.jpg" alt="入围一" onclick="openModal(this)">
         <p>文案一</p>
       </div>
       <div class="photo-card">
-        <img src="party2.jpg" alt="入围二">
+        <img src="party2.jpg" alt="入围二" onclick="openModal(this)">
         <p>文案二</p>
       </div>
     </div>
@@ -487,11 +531,11 @@
     <div class="ribbon">本奖项入围的瞬间有：</div>
     <div class="photos">
       <div class="photo-card">
-        <img src="group1.jpg" alt="入围一">
+        <img src="group1.jpg" alt="入围一" onclick="openModal(this)">
         <p>文案一</p>
       </div>
       <div class="photo-card">
-        <img src="group2.jpg" alt="入围二">
+        <img src="group2.jpg" alt="入围二" onclick="openModal(this)">
         <p>文案二</p>
       </div>
     </div>
@@ -510,26 +554,64 @@
     <div class="ribbon">其他精彩瞬间：</div>
     <div class="photos">
       <div class="photo-card">
-        <img src="hidden1.jpg" alt="入围一">
+        <img src="hidden1.jpg" alt="入围一" onclick="openModal(this)">
         <p>文案一</p>
       </div>
       <div class="photo-card">
-        <img src="hidden2.jpg" alt="入围二">
+        <img src="hidden2.jpg" alt="入围二" onclick="openModal(this)">
         <p>文案二</p>
       </div>
       <div class="photo-card">
-        <img src="hidden3.jpg" alt="入围三">
+        <img src="hidden3.jpg" alt="入围三" onclick="openModal(this)">
         <p>文案三</p>
       </div>
       <div class="photo-card">
-        <img src="hidden4.jpg" alt="入围四">
+        <img src="hidden4.jpg" alt="入围四" onclick="openModal(this)">
         <p>文案四</p>
       </div>
     </div>
   </section>
 
+  <!-- 图片放大模态框 -->
+  <div id="imageModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="expandedImg">
+    <div id="caption" class="caption"></div>
+  </div>
+
   <script>
-    // 可拓展更多交互功能
+    // 图片放大功能
+    function openModal(img) {
+      const modal = document.getElementById("imageModal");
+      const modalImg = document.getElementById("expandedImg");
+      const captionText = document.getElementById("caption");
+      
+      modal.style.display = "block";
+      modalImg.src = img.src;
+      captionText.innerHTML = img.alt;
+      
+      // 阻止事件冒泡（避免点击图片时同时触发其他事件）
+      event.stopPropagation();
+    }
+
+    function closeModal() {
+      document.getElementById("imageModal").style.display = "none";
+    }
+    
+    // 点击模态框背景关闭
+    window.onclick = function(event) {
+      if (event.target.className === 'modal') {
+        closeModal();
+      }
+    }
+    
+    // ESC键关闭
+    document.onkeydown = function(evt) {
+      evt = evt || window.event;
+      if (evt.keyCode == 27) {
+        closeModal();
+      }
+    };
   </script>
 </body>
 </html>
