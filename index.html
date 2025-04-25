@@ -322,6 +322,43 @@
       max-width: 800px;
       margin: 0 auto;
     }
+     /* 新增结束语样式 */
+  .closing-section {
+    margin: 60px auto;
+    text-align: center;
+  }
+  .closing-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background: #f5f5f7; /* 银灰色背景 */
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border: 1px solid #e1e1e3; /* 添加细边框增强质感 */
+  }
+  .closing-title {
+    color: #d4a017; /* 暗黄色 */
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 3px rgba(0,0,0,0.2); /* 加深阴影增强对比 */
+  }
+  .closing-content {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: #555;
+  }
+  .highlight {
+    font-size: 1.5em;
+    color: #000; /* 黑色文字 */
+    font-weight: bold;
+    margin-top: 20px;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
   </style>
 </head>
 <body>
@@ -667,7 +704,17 @@
     </div>
     <p class="video-caption">张嘉彤铺床单珍贵视频</p>
   </section>
-
+  <!-- 新增结束语模块 -->
+  <section class="closing-section">
+    <div class="closing-container">
+      <h2 class="closing-title">🎊 本次颁奖典礼到此结束 🎊</h2>
+      <div class="closing-content">
+        <p>感谢嘉宾未授权的出席</p>
+        <p>并在此为她送上评审团的祝福</p>
+        <p class="highlight">面试拿下！</p>
+      </div>
+    </div>
+  </section>
   <!-- 图片放大模态框 -->
   <div id="imageModal" class="modal">
     <span class="close" onclick="closeModal()">&times;</span>
